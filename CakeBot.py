@@ -7,6 +7,62 @@ user_list = [{"cakeDay": date(2000, 12, 31).isoformat(), "id": "<@00000000000000
 client = discord.Client()
 
 @client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    if message.content.startswith('.cakeday'):
+        for i in user_list:
+            if message.author.id == int(i["id"].strip("<@>")):
+                j = i["cakeDay"]
+                j = dateconvert(j)
+                await message.channel.send("Your cakeday is " + j + "!!")
+                break
+
+
+def dateconvert(date): #method to display into a more user-friendly format "year-month-day" to "Month Day Year"
+    date = date.replace("-", " ")
+    list = date.split() #list[0] = year, list[1] = month, list[2] = day
+    j = monthconvert(list[1]) + dayconvert(list[2]) + list[0]
+    return j #j will be day, month, year combined
+
+def monthconvert(month): #01 - 12
+    if month == "01":
+        return "January "
+    if month == "02":
+        return "February "
+    if month == "03":
+        return "March "
+    if month == "04":
+        return "April "
+    if month == "05":
+        return "May "
+    if month == "06":
+        return "June "
+    if month == "07":
+        return "July "
+    if month == "08":
+        return "August "
+    if month == "09":
+        return "September "
+    if month == "10":
+        return "October "
+    if month == "11":
+        return "November "
+    if month == "12":
+        return "December "
+
+
+def dayconvert(day): #0x - xx
+    if day == "01":
+        return "1st "
+    elif day == "02":
+        return "2nd "
+    elif day == "03":
+        return "3rd "
+    else:
+        return day + "th "
+    
+@client.event
 async def today_date():
     today = date.today().isoformat()
     return today
