@@ -4,3 +4,7 @@ A bot for discord that will track when users joined discord, and announce the "c
 Commands:
 
 .cakeday -replies to user who issued the command with the date that they joined discord.
+
+
+update::
+Decided to overhaul, I underestimated the power of the API. New Cake bot will be coming out that doesnt require array Consider this Cake Bot 0.5 module.
